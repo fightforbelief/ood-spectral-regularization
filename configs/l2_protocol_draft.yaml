@@ -1,0 +1,16 @@
+# Draft notes copied from the implementation package. Nothing in this file is approved.
+status: DRAFT_NOT_FROZEN
+confirmatory_l2_authorized: false
+proposed_not_frozen:
+  primary_metric: target_mse
+  secondary_metrics: [rmse, mae, r2]
+  near_interpolation_ratios: [0.90, 0.95, 0.98, 1.00, 1.02, 1.05, 1.10]
+  preprocessing: "training-subset mean and population standard deviation; zero-variance columns scaled by 1 after centering; restore training target mean"
+  pcr_rounding: "k = max(1, ceil(q * numerical_rank)); q = 1 retains the numerical rank"
+  cv: "five interleaved source folds, unweighted mean of fold MSE, tie keeps the earlier ascending candidate"
+yearprediction_sample_size_list_original: [45, 68, 81, 86, 88, 90, 92, 95, 99, 113, 135, 180, 270, 450, 900]
+superconductivity_sample_size_list_original: [41, 61, 73, 77, 79, 81, 83, 85, 89, 101, 122, 162, 243, 405, 810]
+random_seed_list: null
+n_training_subset_repetitions: null
+uncertainty_procedure: null
+superconductivity_split: null

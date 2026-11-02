@@ -1,0 +1,20 @@
+# Template only. Copying values into reports/protocol_freeze.yaml does not approve them.
+status: UNRESOLVED
+confirmatory_l2_authorized: false
+feature_count_amendment: null
+yearprediction_predictor_count: null
+random_seed_list: null
+n_training_subset_repetitions: null
+primary_endpoint: null
+uncertainty_procedure: null
+preprocessing_rule: null
+zero_variance_rule: null
+pcr_rounding_rule: null
+superconductivity_split: null
+cv_fold_assignment_rule: null
+cv_tie_break_rule: null
+cv_score_aggregation: null
+failed_fit_policy: null
+training_subset_policy: null
+code_identity_kind: SOURCE_TREE_SNAPSHOT_SHA256_V1
+code_identity_sha256: null

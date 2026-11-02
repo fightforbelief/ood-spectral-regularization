@@ -1,0 +1,15 @@
+[project]
+name = "p19-ood-spectral-regularization"
+version = "0.1.0"
+description = "Independent L1/L2 validation of minimum-norm, ridge, and PCR. Confirmatory L2 is blocked."
+requires-python = ">=3.12"
+dependencies = [
+  "numpy",
+  "scipy",
+  "PyYAML",
+  "matplotlib",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

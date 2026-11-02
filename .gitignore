@@ -1,0 +1,41 @@
+# Local environments and caches
+.venv/
+.venv-*/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.tmp_pytest/
+.mypy_cache/
+.DS_Store
+._*
+.ssh/
+*.pem
+.env
+
+# Data, run outputs, and local research notes
+data/
+outputs/
+logs/
+results/
+artifacts/
+runtimes/
+dist/
+reports/
+docs/
+uploads/
+p19-ood-spectral-regularization-docs/
+cursor_prompt.md
+
+# Large arrays and archives
+*.hdf5
+*.partial
+*.pt
+*.parquet
+*.npy
+*.npz
+*.zip
+*.rda
+*.pkl
+*.dta
+*.log
