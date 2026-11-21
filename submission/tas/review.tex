@@ -1,0 +1,39 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,booktabs,graphicx,microtype,setspace}
+\usepackage[authoryear,round]{natbib}
+\setcitestyle{aysep={}}
+\usepackage[hidelinks]{hyperref}
+\urlstyle{same}
+\makeatletter\let\tableinput\@@input\makeatother
+\newcommand{\MSE}{\mathrm{MSE}}
+\newcommand{\mn}{\mathrm{MN}}
+\newcommand{\FigureProvenance}{ The figure was rendered from the scored fits with Matplotlib and plotting code developed with OpenAI Codex (GPT-6).}
+\input{title}
+\hypersetup{pdftitle={\ArticleTitle}}
+\begin{document}
+\setstretch{1.70}
+\begin{center}
+{\Large\bfseries \ArticleTitle\par}
+\ifdefined\Anonymous\else
+\medskip
+\Authors\\
+\Affiliation\\
+Corresponding author: Hanqing Yang, \href{mailto:\Correspondence}{\Correspondence}
+\fi
+\end{center}
+\noindent\textbf{Abstract}\par
+\noindent\input{abstract}\par
+\smallskip
+\noindent\textbf{Keywords}\quad Double descent, numerical rank, pseudoinverse, sensitivity analysis.
+\clearpage
+\let\cite\citep
+\input{body}
+\input{interpretation}
+\paragraph{Data and code availability.} The online appendix gives the complete primary risk curves. The accompanying replication package contains the paired losses, training seeds, selected spectra, cutoff-specific scores, and code for recomputing the tables and figures. The raw data are available from \citet{year} and \citet{superdata}.
+\ifdefined\Anonymous\else The research archive is available at \url{https://github.com/fightforbelief/ood-spectral-regularization}.\fi
+\paragraph{Funding.} The authors received no specific funding for this work.
+\paragraph{Disclosure statement.} The authors declare no competing interests.
+\paragraph{Generative AI use.} OpenAI Codex (GPT-6) assisted with the design and coding of the post-hoc sensitivity and rank analyses, the plotting code, and the drafting of manuscript sections, including the interpretation. Numerical results were computed by the analysis programs.
+\input{tas_references}
+\end{document}

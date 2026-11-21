@@ -1,0 +1,16 @@
+Dear Editor,
+
+Please consider “When a Single Training Subset Sets the Peak of a Minimum-Norm Learning Curve” for the Statistical Computing and Graphics section of The American Statistician.
+
+A reader inspecting a learning curve might take its highest point as an empirical estimate of the interpolation boundary. On a materials benchmark with 81 predictors, one training subset accounted for 99.92% of the total minimum-norm loss at a training size of 73. Changing the singular-value cutoff altered the fitted rank in five of 1,500 fits. The peak of the mean loss moved from 73 to 83, while the median peak stayed at 81. An exact calculation on the recorded decimal features shows that the direction discarded in the most influential fit was algebraically nonzero.
+
+Readers can apply the same checks to their own curves using repetition-level losses and solver tolerances. The two benchmarks each use one fixed holdout, and the tolerance analysis followed inspection of the original results. The accompanying files allow reviewers to examine every repetition and reproduce the figures.
+
+For editorial transparency, OpenAI Codex assisted with the post-hoc analysis code and drafted sections of the archived manuscript. We draw this history to the editor’s attention in light of the publisher’s policy on generative AI.
+
+Sincerely,
+
+Hanqing Yang
+Corresponding author
+Independent Researcher, Suzhou, China
+hanqing.yang189@gmail.com

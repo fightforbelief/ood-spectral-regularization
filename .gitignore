@@ -39,3 +39,7 @@ cursor_prompt.md
 *.pkl
 *.dta
 *.log
+
+# Prepared journal supplements
+!submission/tas/replication-anonymous.zip
+!submission/tas/replication-identified.zip

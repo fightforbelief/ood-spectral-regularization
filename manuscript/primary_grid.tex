@@ -1,0 +1,12 @@
+\appendix
+\section{Complete primary risk curves}
+\begin{center}
+\small
+\begin{tabular}{rrrr@{\hspace{1.1em}}rrrr}\toprule
+\multicolumn{4}{c}{YearPredictionMSD} & \multicolumn{4}{c}{Superconductivity}\\
+\cmidrule(lr){1-4}\cmidrule(lr){5-8}
+$n$ & Min.\ norm & Ridge & PCR & $n$ & Min.\ norm & Ridge & PCR\\\midrule
+\tableinput risk_rows.tex
+\bottomrule\end{tabular}
+\end{center}
+Entries are mean squared errors over the 100 permutations at each observed sample size. All three methods use the same training and evaluation rows within each repetition. The music losses are in squared years and the materials losses in squared kelvin.

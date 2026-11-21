@@ -12,6 +12,7 @@ For every cutoff we restore the intercept and score the resulting predictions on
 \centering
 \caption{Materials sensitivity across the full grid. The changed count is relative to the default among 1,500 fits. Peak locations maximize the indicated sample summary over the 15 observed sizes. The last column measures concentration at the mean peak.}
 \label{tab:cutoff}
+\setlength{\tabcolsep}{3pt}
 \begin{tabular}{lrrrrr}
 \toprule
 Relative floor $c$ & Changed & Mean peak $n$ & Peak mean MSE & Median peak $n$ & Largest share\\
@@ -27,7 +28,7 @@ Deleting one entire training trajectory at a time keeps the pairing across sizes
 
 \begin{figure}[htb]
 \centering\includegraphics[width=.96\linewidth]{../replication/summary/cutoffs.pdf}
-\caption{Recomputed minimum-norm losses on the materials holdout. The near-boundary part of the grid is expanded horizontally. Overlapping lines indicate identical or similar loss summaries. The vertical line marks $p+1=82$.}
+\caption{Recomputed minimum-norm losses on the materials holdout. The near-boundary part of the grid is expanded horizontally. Overlapping lines indicate identical or similar loss summaries. The vertical line marks $p+1=82$.\FigureProvenance}
 \label{fig:cut}
 \end{figure}
 

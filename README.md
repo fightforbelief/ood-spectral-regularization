@@ -2,6 +2,8 @@
 
 [Manuscript (PDF)](paper.pdf) · [Manuscript source](manuscript/paper.tex) · [Paired losses and seeds](replication/losses.csv) · [Cutoff sensitivity](replication/summary/sensitivity.csv)
 
+[The American Statistician preparation files and author actions](submission/tas/README.md) include both review manuscripts, the replication supplements and the English cover letter.
+
 Yunjie Guo and Hanqing Yang, Independent Researcher, Suzhou, China.
 
 At a training size of 73 on UCI Superconductivity, one of 100 subsets contributes 99.92% of the summed minimum-norm holdout loss. A post-hoc relative cutoff of 1e-12 changes just five of 1,500 fitted ranks. The arithmetic-mean peak shifts from 73 to 83, while the median peak stays at 81. A finite-field calculation certifies centered rank 71 for the extreme prefix in the recorded decimal features. The default solver retained 71 directions, and the alternative retained 70.
