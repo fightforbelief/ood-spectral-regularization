@@ -1,0 +1,17 @@
+{
+  "year_run": "20261030T085223Z_l2_28abcf33d8e4",
+  "super_run": "20261102T141929Z_super_b3c9fff27517",
+  "sha256": {
+    "l2_run_manifest.json": "53cffdbbbb08001d6c8b1744cb606fd867b282f9b370ac1b705337021fbfbf25",
+    "holdout_metrics.jsonl": "ffff9943c2c22d12a49e9fd67d82cbd50d703da77a487916d81d8d900d1b414f",
+    "superconductivity_run_manifest.json": "7c1aae8a0e50daad1b2df823d0769fc93052dee3e60de6eaf075da53b55e9221",
+    "STAGE5N6_SUPERCONDUCTIVITY_PROTOCOL_FROZEN.yaml": "b3c9fff27517fd82146099d83fa84ecfff9250b082ea6fe0275977f7ea5b9345",
+    "null_baseline_repetitions.csv": "53676166c19553fecdb1b4608cf6b720f0db4a50a594b07f62845812f9305ad0",
+    "train.csv": "4dfb6e3a1f6ffd969e5a5e42f093c4800d1e2a6c8b1e309f8fcd9f23d86952f3",
+    "protocol_freeze.yaml": "28abcf33d8e4c0f0c404dbd9119899e149c2ee625522fcc65c80749866c642e3"
+  },
+  "split": {
+    "training_row_index_sha256": "903f9d24c2ce5cf14f92c5ac8f2c4cb0e8e3589170befe1ff8497e7609c3f3b2",
+    "holdout_row_index_sha256": "2ae661284a070292b5c9282d90026f06bebf6c5886455e84e679d0e663106743"
+  }
+}

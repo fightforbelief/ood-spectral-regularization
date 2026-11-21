@@ -1,0 +1,78 @@
+\documentclass[11pt]{article}
+\usepackage[letterpaper,margin=0.9in]{geometry}
+\usepackage{amsmath,amssymb,booktabs,graphicx,microtype}
+\usepackage[hidelinks]{hyperref}
+\urlstyle{same}
+\makeatletter\let\tableinput\@@input\makeatother
+\setlength{\parskip}{.32em}
+\setlength{\parindent}{0pt}
+\newcommand{\MSE}{\mathrm{MSE}}
+\newcommand{\mn}{\mathrm{MN}}
+\title{When a single training subset sets the peak of a minimum-norm learning curve}
+\author{Yunjie Guo \qquad Hanqing Yang\\[2pt]
+\small Independent Researcher, Suzhou, China\\
+\small Correspondence: \href{mailto:hanqing.yang189@gmail.com}{hanqing.yang189@gmail.com}}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+\input{abstract}
+\end{abstract}
+
+\section{What sets the peak?}
+A peak in a learning curve is often interpreted as evidence that the number of examples has reached the number of fitted parameters. In isotropic linear models this interpretation has a precise basis. For ridgeless least squares, risk can diverge as the aspect ratio approaches one \cite{hastie}. Optimally tuned ridge can mitigate double descent \cite{nakkiran}. These results leave a practical question for an investigator looking at a finite collection of training sets: would the same training size appear most difficult if almost every fitted model were unchanged, but the solver discarded a few additional singular directions?
+
+We study this question using two completed comparisons of minimum-norm regression, ridge regression and principal components regression (PCR). The estimated response is the expected error over training subsets on a particular held-out set. At each size the same subsets and test rows are used for all three fits. The music benchmark supplies a reference with an artist-disjoint test set. In the materials benchmark, the largest arithmetic mean occurs well below the nominal interpolation boundary. We trace this discrepancy from the shape of the learning curve to individual fits, then recompute their predictions after changing the singular-value cutoff. An exact-arithmetic rank check asks how much of the apparent degeneracy is already present in the \emph{recorded decimal features}.
+
+Classical truncated SVD explains how removing weak directions can change a solution \cite{hansen}. High-dimensional analyses also distinguish conditions favoring ridge and PCR under covariate shift \cite{tang}. Our contribution is an empirical account of which fits move a measured peak, by how much, and whether the change reaches the typical training subset. It uses fixed feature dimension and two distinct holdout designs.
+
+\section{Benchmark comparisons}
+\textbf{Sampling and endpoints.} YearPredictionMSD has 90 audio features. The official artist-disjoint partition puts the first 463,715 songs in the source pool and the last 51,630 in the holdout \cite{year}. The Superconductivity data contain 81 materials descriptors per row \cite{super}. Grouping the 21,263 rows by their complete float64 feature vector yields 15,170 groups. A seeded permutation allocates 12,136 groups (16,871 rows) to training and 3,034 groups (4,392 rows) to the holdout. The group assignment uses features alone. The materials protocol was frozen after the music results were available and before the materials outcomes were opened.
+
+In each benchmark 100 stored seeds generate 100 permutations of the source row indices. The first $n$ rows define the training set at each of 15 sizes from approximately $p/2$ to $10p$. On materials the permutation operates on the concatenation of training groups in split order. Each fit is scored by its mean squared prediction error $L_{rn}$ over every row of the fixed holdout. The prespecified endpoint is $\bar L_n=\sum_{r=1}^{100} L_{rn}/100$. Nested prefixes couple successive sizes within a repetition. For a difference $D$ of two losses on the same prefix, we report the prespecified pointwise interval $\bar D\pm t_{.975,99}s_D/10$ over permutations. No test rows are resampled. Heavy concentration of $\sum_r L_{rn}$ in one observation makes this approximation especially sensitive to which training sets were drawn.
+
+\textbf{Solvers.} Within each training prefix, and separately within each inner training fold, columns are centered and divided by the population standard deviation, with a unit divisor for zero variance. Predictions restore the training response mean. Write $Z=U\operatorname{diag}(s_j)V^\top$ for the centered and scaled training matrix and $z$ for the centered responses. The minimum-norm implementation uses float64 LAPACK GESDD with
+\[
+ \hat\beta_{\mn}(\tau)=\sum_{s_j>\tau} v_j (u_j^\top z)/s_j,\qquad
+ \tau_0=\epsilon_{64}\max(n,p)s_1 .
+\]
+Centering gives $\mathrm{rank}(Z)\le\min(p,m-1)$ for $m$ distinct feature rows. In general affine position the nominal interpolation boundary with an intercept is $n=p+1$. Repeated feature rows or additional linear dependencies can prevent interpolation of arbitrary responses even below this size. Both grids bracket the nominal boundary and omit the boundary itself.
+
+Ridge minimizes $\|z-Z\beta\|^2/n+\lambda\|\beta\|^2$. Its 25 grid values run from $10^{-8}$ to $10^4$ in half-decades. PCR keeps $\max(1,\lceil qk\rceil)$ of the $k$ directions above $\tau_0$, with $q$ in $\{.05,.1,.2,.3,.4,.5,.6,.7,.8,.9,.95,1\}$. The rank is recalculated within each fold. For both methods five source-only folds minimize the equally weighted average of fold MSEs, taking the first candidate in grid order at an exact tie. Folds are assigned to the longest prefix and restricted by position for smaller ones. The outer materials split protects exact feature groups, while the row-level inner folds contain duplicate-feature overlap in 807 of the 1,500 prefixes. The fitted training mean also supplies a post-hoc baseline.
+
+\begin{figure}[tb]
+\centering\includegraphics[width=.96\linewidth]{../replication/summary/curves.pdf}
+\caption{Mean squared holdout error across 100 training prefixes at each size. Both axes use logarithmic scales. The vertical line marks the nominal centered boundary. The response units differ between panels.}
+\label{fig:curves}
+\end{figure}
+
+\textbf{Results from the frozen comparisons.}
+Ridge has the smallest mean MSE of the three fitted estimators at every size in both panels of Figure~\ref{fig:curves}. All 30 pointwise paired intervals for PCR minus ridge have positive lower limits. On music at $n=90$ this difference is 7.42 squared years (95\% interval 5.21 to 9.63). Ridge reduces the training-mean reference MSE from 119.21 to 115.78, a 2.9\% reduction. At $n=900$, the respective losses are 117.92 and 99.50. On materials at $n=73$, ridge scores 509.82 compared with 610.22 for PCR and 1,160.67 for the training mean. At $n=810$, minimum norm and ridge score 341.26 and 333.63, giving a paired difference of 7.63 (5.88 to 9.38).
+
+The agreement on the regularized methods masks a difference in how the unregularized means arise. On music at $n=90$ the worst repetition contributes 25.1\% of the minimum-norm loss. On materials at $n=73$, repetition 5 alone contributes 99.92\%. The median there is $1.40\times10^6$, against a mean of $3.24\times10^{19}$. The median curve peaks at $n=81$. At eight materials sizes from 41 through 85, ridge wins all 100 paired comparisons yet the Student intervals for the mean minimum-norm excess over ridge contain zero. For example, at 73 the interval is $[-3.18,9.66]\times10^{19}$. The win fraction measures frequency and the mean measures magnitude. With only 100 draws, inference for the latter depends heavily on the sampled upper tail.
+
+\input{sensitivity}
+\input{discussion}
+
+\begin{thebibliography}{9}\small
+\bibitem{hastie} T. Hastie, A. Montanari, S. Rosset and R. J. Tibshirani (2022). Surprises in high-dimensional ridgeless least squares interpolation. \emph{Annals of Statistics} 50, 949--986. \href{https://doi.org/10.1214/21-AOS2133}{doi:10.1214/21-AOS2133}.
+\bibitem{nakkiran} P. Nakkiran, P. Venkat, S. Kakade and T. Ma (2021). Optimal regularization can mitigate double descent. \emph{ICLR}. \url{https://arxiv.org/abs/2003.01897}.
+\bibitem{hansen} P. C. Hansen (1998). \emph{Rank-Deficient and Discrete Ill-Posed Problems}. SIAM. \href{https://doi.org/10.1137/1.9780898719697}{doi:10.1137/1.9780898719697}.
+\bibitem{tang} S. Tang, J. Wu, J. Fan and C. Jin (2025). Benign overfitting in out-of-distribution generalization of linear models. \emph{ICLR}. \url{https://arxiv.org/abs/2412.14474}.
+\bibitem{year} T. Bertin-Mahieux (2011). Year Prediction MSD. UCI Machine Learning Repository. \url{https://archive.ics.uci.edu/dataset/203/yearpredictionmsd}.
+\bibitem{super} K. Hamidieh (2018). A data-driven statistical model for predicting the critical temperature of a superconductor. \emph{Computational Materials Science} 154, 346--354. \href{https://doi.org/10.1016/j.commatsci.2018.07.052}{doi:10.1016/j.commatsci.2018.07.052}. Data: \url{https://archive.ics.uci.edu/dataset/464}.
+\end{thebibliography}
+
+\appendix
+\section{Complete primary risk curves}
+\begin{center}
+\small
+\begin{tabular}{rrrr@{\hspace{1.1em}}rrrr}\toprule
+\multicolumn{4}{c}{YearPredictionMSD} & \multicolumn{4}{c}{Superconductivity}\\
+\cmidrule(lr){1-4}\cmidrule(lr){5-8}
+$n$ & Min.\ norm & Ridge & PCR & $n$ & Min.\ norm & Ridge & PCR\\\midrule
+\tableinput risk_rows.tex
+\bottomrule\end{tabular}
+\end{center}
+Entries are mean squared errors over the 100 permutations at each observed sample size. All three methods use the same training and evaluation rows within each repetition. The music losses are in squared years and the materials losses in squared kelvin.
+\end{document}

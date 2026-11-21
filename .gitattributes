@@ -1,0 +1,4 @@
+# The released numeric tables are compared byte-for-byte on Windows and Unix.
+replication/*.csv text eol=lf
+replication/summary/*.csv text eol=lf
+replication/provenance.json text eol=lf
